@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    //
+    // tambahkan baris ini kalau id tipe datanya char
+    public $incrementing = false;
+    
     protected $fillable = [
         'name',
         'address',

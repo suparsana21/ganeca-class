@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Teacher;
+use Session; // => Illuminate\Support\Facades\Session;
 
 class TeacherController extends Controller
 {
@@ -85,7 +86,13 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return view('pages.teacher.edit');
+        
+        $data = Teacher::findOrFail($id);
+        // $data = Teacher::find($id);
+        // $data = Teacher::where('id',$id)
+        //     ->get();
+        // $array = ['teacher' => $data, 'siswa' => $siswa ,'pelajaran' => $pelaja];
+        return view('pages.teacher.edit',compact('data'));
     }
 
     /**
@@ -97,7 +104,24 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'string|required',
+            'address' => 'string|required',
+            'phone' => 'string|required',
+            'dob' => 'date|required|date_format:Y-m-d'
+        ]);
+        // dd($request->all());
+        $teacher = Teacher::findOrFail($id);
+        // $teacher->update($request->all());
+        $teacher->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'dob' => $request->dob
+        ]);
+
+        Session::flash('message','Success update data id : '.$teacher->name);
+        return back();
     }
 
     /**
@@ -108,6 +132,10 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Teacher::destroy($id);
+        $teacher = Teacher::find($id);
+        $teacher->delete();
+        Session::flash('message','Success delete data : '.$teacher->name);
+        return back();
     }
 }

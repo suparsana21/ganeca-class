@@ -38,6 +38,8 @@ Route::resource('teacher', 'TeacherController');
 
 // Route::get('teacher/index','TeacherController@index')->name('teacher.index');
 // Route::get('teacher/create','TeacherController@create')->name('teacher.create');
+// Route::get('teacher/{id}/edit','TeacherController@create')->name('teacher.create');
+
 
 
 ?>

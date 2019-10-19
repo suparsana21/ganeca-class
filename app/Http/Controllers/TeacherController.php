@@ -15,7 +15,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::all();
+        // path view/pages/teacher/index.blade.php
+        return view('pages.teacher.index',compact('teachers')); // menampilkan list teacher
     }
 
     /**
@@ -26,7 +28,7 @@ class TeacherController extends Controller
     public function create()
     {
         //
-        return view('pages.teacher.form');
+        return view('pages.teacher.create');
     }
 
     /**
@@ -44,6 +46,7 @@ class TeacherController extends Controller
             'address' => 'string|required',
             'phone' => 'string|required',
         ]);
+      
 
         // Object Teacher 
         $teacher = [
@@ -58,7 +61,7 @@ class TeacherController extends Controller
         // Process Creating Data
         $input = Teacher::create($teacher);
 
-        return redirect()->back();
+        return redirect(route('teacher.index'));
 
 
     }
@@ -82,7 +85,7 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.teacher.edit');
     }
 
     /**

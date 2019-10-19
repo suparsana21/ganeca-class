@@ -35,3 +35,9 @@ Route::get('/demo',function(){
 
 // Route GET dengan Resource Controller
 Route::resource('teacher', 'TeacherController');
+
+// Route::get('teacher/index','TeacherController@index')->name('teacher.index');
+// Route::get('teacher/create','TeacherController@create')->name('teacher.create');
+
+
+?>
